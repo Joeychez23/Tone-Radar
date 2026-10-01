@@ -1,0 +1,44 @@
+#!/bin/bash
+apt-get update
+source ~/.nvm/nvm.sh
+cd etc
+cd nginx
+cd sites-available
+echo server { > default
+echo server_name books.aws-prac-route53.com\; >> default
+echo location / { >> default
+echo proxy_pass http://$(curl http://169.254.169.254/latest/meta-data/local-ipv4):8080\; >> default
+echo proxy_http_version 1.1\; >> default
+echo proxy_set_header Upgrade \$http_upgrade\; >> default
+echo proxy_set_header Connection \’upgrade’\; >> default
+echo proxy_set_header Host \$host\; >> default
+echo proxy_cache_bypass \$http_upgrade\; >> default
+echo } >> default
+echo listen 443 ssl\; \# managed by Certbot >> default
+echo ssl_certificate /etc/letsencrypt/live/books.aws-prac-route53.com/fullchain.pem\; \# managed by Certbot >> default
+echo ssl_certificate_key /etc/letsencrypt/live/books.aws-prac-route53.com/privkey.pem\; \# managed by Certbot >> default
+echo include /etc/letsencrypt/options-ssl-nginx.conf\; \# managed by Certbot >> default
+echo ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem\; \# managed by Certbot >> default
+echo location /J3boN6i0YKMf1u4eyrunPd8ocHzTyK { >> default
+echo return 302\; >> default
+echo } >> default
+echo } >> default
+echo server { >> default
+echo if \(\$host \= books.aws-prac-route53.com\) { >> default
+echo return 301 https://\$host\$request_uri\; >> default
+echo } \# managed by Certbot >> default
+echo listen 80\; >> default
+echo server_name books.aws-prac-route53.com\; >> default
+echo return 404\; \# managed by Certbot >> default
+echo } >> default
+systemctl restart nginx
+cd ..
+cd ..
+cd ..
+cd root
+npm install forever -g
+cd Tone-Radar
+git pull origin main
+npm run install:all
+npm install forever-monitor
+forever start -c "npm start" ./
