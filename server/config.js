@@ -12,7 +12,7 @@ function required(name) {
 
 const config = {
   // API_PORT wins so a PORT meant for the React dev server isn't picked up here.
-  port: Number(process.env.API_PORT || process.env.PORT) || 3001,
+  port: Number(process.env.API_PORT || process.env.PORT) || 8080,
   isProduction: process.env.NODE_ENV === "production",
   typesafeApiKey: required("TYPESAFE_API_KEY"),
   typesafeUrl: process.env.TYPESAFE_URL || "https://api.typesafe.ai/v1/systemone",
