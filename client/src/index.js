@@ -11,4 +11,4 @@ createRoot(document.getElementById("root")).render(
 );
 
 // Installable PWA with offline app shell. Only active in production builds.
-serviceWorkerRegistration.unregister();
+// serviceWorkerRegistration.register();
