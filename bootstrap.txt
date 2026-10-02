@@ -38,7 +38,6 @@ cd ..
 cd root
 npm install forever -g
 cd Tone-Radar
-git reset --hard origin/main
 git pull origin main
 npm run install:all
 npm install forever-monitor
