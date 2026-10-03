@@ -45,7 +45,6 @@ export default function InsightsView({ active, onRequireAccount }) {
   if (status !== "signedIn") {
     return (
       <Gate
-        icon="chart"
         title="See how your tone changes over time"
         body={
           accountsAvailable
@@ -85,10 +84,9 @@ export default function InsightsView({ active, onRequireAccount }) {
 
       {empty && (
         <div className="card empty">
-          <Icon name="chart" size={28} />
           <p>Nothing here yet. When you press <strong>Copy &amp; send</strong> on a message, its scores show up here.</p>
           <a className="btn" href="#/compose">
-            <Icon name="pen" size={15} /> Check a message
+            Check a message
           </a>
         </div>
       )}
@@ -119,7 +117,7 @@ export default function InsightsView({ active, onRequireAccount }) {
                 <p className="muted small">Daily average score (0–100) of messages when you first checked them and when you sent them.</p>
               </div>
               <button className="btn btn-ghost btn-sm" onClick={() => setShowTable((v) => !v)} aria-pressed={showTable}>
-                <Icon name="table" size={14} /> {showTable ? "Chart" : "Table"}
+                {showTable ? "Chart" : "Table"}
               </button>
             </div>
             <Legend series={SERIES} />
@@ -193,7 +191,7 @@ export default function InsightsView({ active, onRequireAccount }) {
                     key: p.id,
                     label: p.label,
                     value: p.count,
-                    sub: `${DIM_BY_ID[p.dim]?.label ?? p.dim} · fixed ${p.fixed} of ${p.count}`,
+                    sub: `${DIM_BY_ID[p.dim]?.label ?? p.dim}, fixed ${p.fixed} of ${p.count}`,
                   }))}
                 />
               ) : (

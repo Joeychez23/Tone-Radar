@@ -1,7 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { AUDIENCES, CHANNELS } from "../lib/dimensions";
 import { EXAMPLES } from "../lib/examples";
-import Icon from "./Icon";
 
 const MAX_CHARS = 8000;
 
@@ -47,7 +46,7 @@ const Composer = forwardRef(function Composer(
           </select>
         </label>
         <button className={`btn btn-ghost btn-sm ${showContext ? "on" : ""}`} onClick={() => setShowContext((v) => !v)} aria-expanded={showContext}>
-          <Icon name="info" size={14} /> Situation
+          Situation
         </button>
       </div>
 
@@ -66,7 +65,7 @@ const Composer = forwardRef(function Composer(
 
       {draftTitle && (
         <div className="draft-pill">
-          <Icon name="folder" size={13} /> Editing draft: <strong>{draftTitle}</strong>
+          Editing draft: <strong>{draftTitle}</strong>
         </div>
       )}
 
@@ -87,23 +86,26 @@ const Composer = forwardRef(function Composer(
           {status === "scanning" && "Scanning…"}
           {status === "ready" && stats && (
             <>
-              Up to date · {stats.roundTripMs} ms
-              {stats.cached > 0 && ` · ${stats.cached} unchanged sentence${stats.cached === 1 ? "" : "s"} reused`}
+              Up to date in {stats.roundTripMs} ms
+              {stats.cached > 0 && `, ${stats.cached} unchanged sentence${stats.cached === 1 ? "" : "s"} reused`}
             </>
           )}
           {status === "idle" && "Waiting for text"}
           {status === "error" && "Couldn't analyze"}
         </span>
         <span className="muted small counter">
-          {words} words · {text.length.toLocaleString()}/{MAX_CHARS.toLocaleString()}
+          <span>{words} words</span>
+          <span>
+            {text.length.toLocaleString()}/{MAX_CHARS.toLocaleString()}
+          </span>
         </span>
         <span className="spacer" />
         <ExampleMenu onPick={onLoadExample} />
         <button className="btn btn-ghost btn-sm" onClick={onClear} disabled={!text} title="Clear message">
-          <Icon name="trash" size={14} /> Clear
+          Clear
         </button>
         <button className="btn btn-sm" onClick={onSave} disabled={!text.trim() || saving} title="Save draft (⌘S)">
-          <Icon name="save" size={14} /> {saving ? "Saving…" : "Save draft"}
+          {saving ? "Saving…" : "Save draft"}
         </button>
       </div>
     </section>
@@ -121,7 +123,7 @@ function ExampleMenu({ onPick }) {
           if (ex) onPick(ex);
         }}
       >
-        <option value="">Try an example…</option>
+        <option value="">Load a sample</option>
         {EXAMPLES.map((ex) => (
           <option key={ex.id} value={ex.id}>
             {ex.name}

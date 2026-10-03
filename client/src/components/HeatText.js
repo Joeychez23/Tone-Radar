@@ -21,6 +21,9 @@ export default function HeatText({ text, sentences, selectedIndex, onSelect, len
   return (
     <div className="heat">
       <div className="heat-toolbar">
+        <span className="strip-label">
+          Heat map <span className="strip-count">{sentences.length} {sentences.length === 1 ? "sentence" : "sentences"}</span>
+        </span>
         <div className="seg seg-sm" role="radiogroup" aria-label="Color sentences by">
           {LENSES.map((l) => (
             <button key={l.id} role="radio" aria-checked={lens === l.id} className={lens === l.id ? "on" : ""} onClick={() => onLensChange(l.id)}>

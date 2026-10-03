@@ -53,8 +53,8 @@ export default function RadarChart({ values, baseline, scanning, onAxisClick, ho
           const [x, y] = point(i, 1);
           return <line key={a.id} x1={CX} y1={CY} x2={x} y2={y} className="grid-spoke" />;
         })}
-        <text x={CX + 4} y={CY - R * TIER_THRESHOLDS.hot - 4} className="zone-label">hot</text>
-        <text x={CX + 4} y={CY - R * TIER_THRESHOLDS.warm - 4} className="zone-label">warm</text>
+        <text x={CX + 4} y={CY - R * TIER_THRESHOLDS.hot - 4} className="zone-label">Hot</text>
+        <text x={CX + 4} y={CY - R * TIER_THRESHOLDS.warm - 4} className="zone-label">Warm</text>
 
         <g className="sweep" style={{ transformOrigin: `${CX}px ${CY}px` }}>
           <path d={`M${CX},${CY} L${CX + R},${CY} A${R},${R} 0 0,0 ${CX + Math.cos(-0.9) * R},${CY + Math.sin(-0.9) * R} Z`} fill="url(#sweep-fade)" />
@@ -155,7 +155,7 @@ function RadarTooltip({ axis, value, baseline, hottest }) {
       <div className="tt-row">
         <span className="tt-key key-now" />
         <strong>{pct(value)}</strong>
-        <span className="tt-muted">now · {TIER_LABEL[tier]}</span>
+        <span className="tt-muted">now, {TIER_LABEL[tier].toLowerCase()}</span>
       </div>
       {baseline !== null && (
         <div className="tt-row">

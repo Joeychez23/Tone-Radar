@@ -52,7 +52,7 @@ Create `server/.env` from `server/.env.example`:
 | `MONGODB_URI` | Atlas connection string *without* a database name |
 | `MONGODB_DB` | Database name (default `tone_radar`) |
 | `JWT_SECRET` | Long random string for signing sessions |
-| `API_PORT` | API port (default 5050) |
+| `API_PORT` | API port (default 5050; the React dev server runs on 3100) |
 
 Without `MONGODB_URI`, the app runs in **guest mode**: checking and rewrites
 work, while accounts, drafts, and insights are hidden.
@@ -60,7 +60,7 @@ work, while accounts, drafts, and insights are hidden.
 ## Run
 
 ```bash
-npm run dev        # API on :5050 + React dev server on :3000 (proxied)
+npm run dev        # API on :5050 + React dev server on :3100 (proxied)
 npm test           # server (node:test) + client (Jest) tests
 npm run build      # production build of the client
 npm start          # Express serves the API and client/build on API_PORT

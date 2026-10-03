@@ -4,9 +4,9 @@ const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
 
-const BG = [17, 19, 38];
-const RING = [99, 102, 241];
-const SWEEP = [129, 140, 248];
+const BG = [14, 16, 19];
+const RING = [34, 211, 238];
+const SWEEP = [103, 232, 249];
 const HOT = [239, 91, 70];
 const WARM = [250, 178, 25];
 const COOL = [12, 163, 12];
@@ -56,7 +56,7 @@ function render(size, { maskable = false } = {}) {
         }
       }
       // Leading edge line.
-      if (d <= 1 && delta < 0.035) col = mix(col, [224, 231, 255], 0.9);
+      if (d <= 1 && delta < 0.035) col = mix(col, [207, 250, 254], 0.9);
       for (const b of blips) {
         const bx = c + Math.cos(b.a) * b.r * R, by = c + Math.sin(b.a) * b.r * R;
         const bd = Math.hypot(x - bx, y - by) / R;

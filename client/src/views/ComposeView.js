@@ -294,6 +294,12 @@ export default function ComposeView({ active, draftToOpen, onDraftOpened, onRequ
         ) : (
           <>
             <section className="card radar-card" aria-label="Message overview">
+              <div className="panel-strip">
+                <span>Tone radar</span>
+                <span className={`strip-status is-${analysis.status === "error" ? "off" : analysis.status === "scanning" ? "busy" : "live"}`}>
+                  {analysis.status === "error" ? "Offline" : analysis.status === "scanning" ? "Scanning" : "Live"}
+                </span>
+              </div>
               <div className="radar-grid">
                 <RadarChart
                   values={radar}
@@ -367,18 +373,29 @@ export default function ComposeView({ active, draftToOpen, onDraftOpened, onRequ
 function EmptyRadar({ onPick }) {
   return (
     <section className="card empty-radar">
-      <RadarChart values={null} scanning />
-      <h2>Check your tone before you hit send</h2>
-      <p className="muted">
-        Every sentence gets a heat score for <strong>passive-aggression</strong>, <strong>blame</strong>, <strong>hedging</strong>, and{" "}
-        <strong>unclear asks</strong>. Click a red sentence to see why it's hot and get rewrites that Jev has checked to keep your meaning.
-      </p>
-      <div className="example-buttons">
-        {EXAMPLES.slice(0, 3).map((ex) => (
-          <button key={ex.id} className="btn" onClick={() => onPick(ex)}>
-            <Icon name="sparkle" size={14} /> {ex.name}
-          </button>
-        ))}
+      <div className="panel-strip">
+        <span>Tone radar</span>
+        <span className="strip-status is-busy">Standby</span>
+      </div>
+      <div className="standby">
+        <RadarChart values={null} scanning />
+        <div className="standby-copy">
+          <h2>Check your tone before you hit send</h2>
+          <p className="muted">
+            Paste a message and each sentence is scored for passive-aggression, blame, hedging and unclear asks. Open a red one to see why it reads that
+            way and pick a rewrite Jev has checked against your meaning.
+          </p>
+          <p className="sample-head">Or load a sample</p>
+          <ul className="sample-list">
+            {EXAMPLES.slice(0, 3).map((ex) => (
+              <li key={ex.id}>
+                <button className="sample-link" onClick={() => onPick(ex)}>
+                  {ex.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

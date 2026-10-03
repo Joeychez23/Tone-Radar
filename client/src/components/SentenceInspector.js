@@ -86,7 +86,7 @@ export default function SentenceInspector({ sentence, options, sensitivity, onAp
     >
       <header className="inspector-head">
         <span className={`tier-badge badge-${tier}`}>
-          <TierIcon tier={tier} /> {TIER_LABEL[tier]} · {pct(heat)}
+          <TierIcon tier={tier} /> {TIER_LABEL[tier]} {pct(heat)}
         </span>
         <span className="inspector-pos muted">{position}</span>
         <span className="spacer" />
@@ -113,14 +113,14 @@ export default function SentenceInspector({ sentence, options, sensitivity, onAp
 
       {tier !== "cool" && (
         <p className="inspector-tip">
-          <Icon name="info" size={15} /> {DIM_BY_ID[dominant].tip}
+          {DIM_BY_ID[dominant].tip}
         </p>
       )}
 
       <div className="suggest">
         <div className="suggest-head">
           <h3>
-            <Icon name="wand" size={16} /> Suggested rewrites
+            Suggested rewrites
           </h3>
           {state.status === "ready" && state.data.candidates.length > 0 && (
             <span className="muted small">
@@ -158,7 +158,7 @@ export default function SentenceInspector({ sentence, options, sensitivity, onAp
             {ranked.all.length > 0 && (
               <details className="all-candidates" open={showAll} onToggle={(e) => setShowAll(e.currentTarget.open)}>
                 <summary>
-                  <Icon name="table" size={14} /> All {ranked.all.length} candidates Jev scored
+                  All {ranked.all.length} candidates Jev scored
                 </summary>
                 <div className="table-wrap">
                   <table className="data-table">
@@ -192,7 +192,7 @@ export default function SentenceInspector({ sentence, options, sensitivity, onAp
 
       <div className="custom">
         <label htmlFor="custom-rewrite">
-          <Icon name="pen" size={14} /> Try your own version
+          Try your own version
         </label>
         <textarea
           id="custom-rewrite"
@@ -296,7 +296,7 @@ function Suggestion({ c, original, beforeHeat, best, onApply }) {
         {c.edits.length > 0 && <span className="muted small">fixes: {[...new Set(c.edits.map((e) => e.label))].join(", ")}</span>}
         <span className="spacer" />
         <button className="btn btn-primary btn-sm" onClick={onApply}>
-          <Icon name="check" size={14} /> Apply
+          Apply
         </button>
       </div>
     </li>

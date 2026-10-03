@@ -40,7 +40,7 @@ function Shell() {
         {route === "insights" && <InsightsView active onRequireAccount={requireAccount} />}
       </main>
       <footer className="app-footer muted small">
-        Judgments by TypeSafe Jev. Suggestions are checked for meaning, but you know your reader best.
+        Scored by TypeSafe Jev.
       </footer>
       <AuthDialog open={auth.open} reason={auth.reason} onClose={() => setAuth({ open: false, reason: "" })} />
     </div>

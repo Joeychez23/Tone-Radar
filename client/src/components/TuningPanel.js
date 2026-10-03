@@ -11,7 +11,7 @@ export default function TuningPanel({ sensitivity, onChange }) {
   return (
     <details className="tuning card">
       <summary>
-        <Icon name="sliders" size={16} /> Tune sensitivity
+        Tune sensitivity
         {!isDefault && <span className="tuned-dot" title="Customized" />}
         <Icon name="chevronDown" size={16} className="chev" />
       </summary>

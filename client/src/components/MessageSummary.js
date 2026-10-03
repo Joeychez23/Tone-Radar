@@ -20,7 +20,7 @@ export default function MessageSummary({ message, audienceLabel }) {
         <dd title={tone.detail}>
           <span className={`tone-dot tone-${message.tone}`} aria-hidden="true" />
           {tone.label}
-          {toneP !== undefined && <span className="muted"> · {pct(toneP)} likely</span>}
+          {toneP !== undefined && <span className="muted">{pct(toneP)} likely</span>}
         </dd>
       </div>
       <div className="summary-item">

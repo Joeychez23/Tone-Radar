@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Icon, { TierIcon } from "./Icon";
+import { TierIcon } from "./Icon";
 
 // "Fix the red sentences before you hit send": counts what's left, jumps to
 // the next hot sentence, and gates the copy-to-send action.
@@ -20,7 +20,7 @@ export default function SendBar({ counts, onFixNext, onSend, disabled, stale }) 
   let summary;
   if (!counts.analyzed) summary = "Write something to check it";
   else if (hot) summary = `${hot} hot sentence${hot === 1 ? "" : "s"} left`;
-  else if (warm) summary = `No hot sentences · ${warm} warm`;
+  else if (warm) summary = `No hot sentences, ${warm} warm`;
   else summary = "Every sentence is cool";
 
   return (
@@ -28,12 +28,12 @@ export default function SendBar({ counts, onFixNext, onSend, disabled, stale }) 
       <div className="sendbar-summary">
         {counts.analyzed > 0 && <TierIcon tier={hot ? "hot" : warm ? "warm" : "cool"} size={16} />}
         <span>{summary}</span>
-        {stale && <span className="muted small">· updating…</span>}
+        {stale && <span className="muted small">Updating…</span>}
       </div>
       <div className="sendbar-actions">
         {hot + warm > 0 && (
           <button className="btn" onClick={onFixNext}>
-            <Icon name="wand" size={15} /> Fix next
+            Fix next
           </button>
         )}
         {confirming ? (
@@ -48,7 +48,7 @@ export default function SendBar({ counts, onFixNext, onSend, disabled, stale }) 
           </>
         ) : (
           <button className="btn btn-primary" onClick={send} disabled={disabled}>
-            <Icon name="copy" size={15} /> Copy &amp; send
+            Copy &amp; send
           </button>
         )}
       </div>

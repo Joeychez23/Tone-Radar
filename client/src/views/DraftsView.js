@@ -51,7 +51,6 @@ export default function DraftsView({ onOpen, onRequireAccount }) {
   if (status !== "signedIn") {
     return (
       <Gate
-        icon="folder"
         title="Your drafts live here"
         body={accountsAvailable ? "Sign in to save messages you're still working on and come back to them later." : "Drafts need the database, which isn't connected right now."}
         action={accountsAvailable ? () => onRequireAccount("Sign in to save and reopen drafts.") : null}
@@ -79,10 +78,9 @@ export default function DraftsView({ onOpen, onRequireAccount }) {
       {drafts === null && !error && <div className="muted">Loading drafts…</div>}
       {drafts && drafts.length === 0 && (
         <div className="card empty">
-          <Icon name="folder" size={28} />
           <p>No drafts yet. Press <kbd>⌘S</kbd> while writing to save one.</p>
           <a className="btn" href="#/compose">
-            <Icon name="pen" size={15} /> Start writing
+            Start writing
           </a>
         </div>
       )}
@@ -97,7 +95,7 @@ export default function DraftsView({ onOpen, onRequireAccount }) {
                   <div className="draft-meta">
                     <h3>{d.title}</h3>
                     <span className="muted small">
-                      {CHANNELS.find((c) => c.id === d.channel)?.label} · to {AUDIENCES.find((a) => a.id === d.audience)?.label.toLowerCase()} · {timeAgo(d.updatedAt)}
+                      {CHANNELS.find((c) => c.id === d.channel)?.label} to {AUDIENCES.find((a) => a.id === d.audience)?.label.toLowerCase()}, {timeAgo(d.updatedAt)}
                     </span>
                   </div>
                 </div>
@@ -106,7 +104,7 @@ export default function DraftsView({ onOpen, onRequireAccount }) {
               <div className="draft-foot">
                 {d.readiness !== null && d.readiness !== undefined ? (
                   <span className={`chip chip-${r.tier}`}>
-                    <TierIcon tier={r.tier} size={12} /> {d.readiness} · {r.label}
+                    <TierIcon tier={r.tier} size={12} /> {r.label} ({d.readiness})
                   </span>
                 ) : (
                   <span className="muted small">Not checked</span>
@@ -124,16 +122,15 @@ export default function DraftsView({ onOpen, onRequireAccount }) {
   );
 }
 
-export function Gate({ icon, title, body, action }) {
+export function Gate({ title, body, action }) {
   return (
     <div className="page">
       <div className="card gate">
-        <Icon name={icon} size={32} />
         <h2>{title}</h2>
         <p className="muted">{body}</p>
         {action && (
           <button className="btn btn-primary" onClick={action}>
-            <Icon name="user" size={15} /> Sign in or create an account
+            Sign in or create an account
           </button>
         )}
       </div>
