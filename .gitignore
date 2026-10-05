@@ -5,3 +5,4 @@ client/build/
 npm-debug.log*
 dep
 .claude
+package-lock.json
